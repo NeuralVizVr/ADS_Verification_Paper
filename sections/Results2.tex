@@ -1,0 +1,41 @@
+\section{Results and Discussion}
+\label{sec:results}
+
+Building on the methodology of Sections~\ref{sec:nn-architectures}--\ref{sec:verificationApproach},
+we systematically probe robustness across four orthogonal axes and two
+independent verifiers.  
+Table~\ref{tab:exp-grid} lists the levels in each dimension; their full
+cross-product defines our evaluation matrix.
+
+\begin{table}[h]
+\centering
+\caption{Experimental grid used throughout the results section.}
+\label{tab:exp-grid}
+\begin{tabular}{@{}lp{0.70\linewidth}@{}}
+\toprule
+\textbf{Factor} & \textbf{Levels} \\ \midrule
+Model capacity & \textit{39}, \textit{116}, \textit{520}, \textit{924} parameters (CNNs; Section~\ref{sec:nn-architectures}). \\[2pt]
+Training regime & Vanilla; PGD adversarial training with \(\varepsilon \in \{15,25\}/255\). \\[2pt]
+Safety property & \(\mathbf{p_1}\), \(\mathbf{p_2}\), \(\mathbf{p_3}\), \(\mathbf{p_4}\) (Section~\ref{sec:formal-properties}). \\[2pt]
+Perturbation radius & \(\ell_\infty\) bounds of \(3/255\), \(5/255\), \(10/255\), \(20/255\). \\[2pt]
+Verifier & \(\alpha,\beta\)\textsc{-CROWN}  and \textsc{Marabou} . \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Baseline accuracy.}
+The vanilla networks attain clean-test accuracies of
+\(91.5\%\), \(97\%\), \(98.5\%\), and \(99\%\) for the 39, 116, 520, and 924 models,
+respectively, on the 200-image test set introduced in
+Section~\ref{sec:data_collection}. 
+
+\paragraph{Verification workload.}
+From this corpus we select
+\textbf{100 images} that every vanilla model classifies correctly.
+Crossing the factors of Table~\ref{tab:exp-grid} with these 100 inputs yields
+\[
+4 \times 3 \times 4 \times 4 \times 2 \times 100 \;=\; 38\,400
+\]
+individual verification queries.  
+The remainder of Section~\ref{sec:results} dissects their outcomes along
+five lenses: model capacity, training regime, verifier behaviour, property
+difficulty, and perturbation radius.

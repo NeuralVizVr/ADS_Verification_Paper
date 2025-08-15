@@ -1,0 +1,80 @@
+\subsection{Task-specific Adaptation of the Formal Properties}
+\label{sec:task-adaptation}
+
+The canonical properties from Section~\ref{sec:formal-properties} provide a strong theoretical foundation, but their reliance on absolute thresholds (\(\eta, \delta\)) is problematic for practical application. Because neural network logits are unbounded and their scale can vary significantly between models, these absolute bounds are not robust. To create meaningful and scale-invariant safety conditions for our autonomous-driving controller, we therefore adapt the original properties into a new suite (\(\mathbf{p_1}\)-\(\mathbf{p_4}\)). This involves two primary adjustments: replacing absolute thresholds with relative ones, and creating a composite safety verdict.
+
+\paragraph{1. From Absolute to Relative Thresholds.}
+We replace the absolute bounds of SR and SCR with relative ones that are independent of logit scale and sign. For confidence, we cap the \emph{downward change} of the correct-class logit relative to its initial magnitude. For stability, we do the same for every logit individually. This yields two adapted properties:
+
+\begin{itemize}
+    \item \textbf{Adapted SCR (\(\mathbf{p_2}\))}: Substitutes the absolute floor \(\eta\) with a relative offset $\Delta_{\text{conf}}$, ensuring the correct-class logit does not collapse.
+    \[
+        \mathcal{N}(\boldsymbol{x})_{y}
+        \;\ge\;
+        \mathcal{N}(\boldsymbol{\hat{x}})_{y}
+        \;-\;
+        \Delta_{\text{conf}},
+        \qquad\text{where}\quad
+        \Delta_{\text{conf}}
+            = \delta_{\text{conf}}\,
+              \bigl|\mathcal{N}(\boldsymbol{\hat{x}})_{y}\bigr|.
+    \]
+    \item \textbf{Logit Stability (\(\mathbf{p_4}\))}: Replaces the uniform bound \(\delta\) of SR with a stricter, per-coordinate relative bound $\Delta_{\text{stab},i}$, preventing uncontrolled drift in any single logit.
+    \[
+        \bigl|
+           \mathcal{N}(\boldsymbol{x})_{i}
+           -\mathcal{N}(\boldsymbol{\hat{x}})_{i}
+        \bigr|
+        \;\le\;
+        \Delta_{\text{stab}, i}
+        \;\;\forall i,
+        \qquad\text{where}\quad
+        \Delta_{\text{stab}, i}
+            = \delta_{\text{stab}}\,
+              \bigl|\mathcal{N}(\boldsymbol{\hat{x}})_{i}\bigr|.
+    \]
+\end{itemize}
+The factors \(\delta_{\text{conf}}\) and \(\delta_{\text{stab}}\) are user-defined relative parameters in the range \((0,1)\).
+
+\paragraph{2. Creating a Composite Safety Verdict.}
+Finally, to create a single safety rule, we define Combined Robustness (\(\mathbf{p_3}\)) as the logical conjunction \(\text{CR}\wedge\text{SCR}\). This is critical because SCR ensures confidence in the original prediction, but it does not prevent another class from becoming the new top choice. By combining it with CR, which enforces class consistency, \(\mathbf{p_3}\) ensures that the correct maneuver is both maintained and trusted with a sufficient level of confidence.
+
+
+These adaptations result in the four properties summarised in Table~\ref{tab:prop-defs}, which form the basis for all subsequent analysis. All quantitative results, including the specific values for \(\varepsilon\), \(\delta_{\text{conf}}\) and \(\delta_{\text{stab}}\) are reported in Section~\ref{sec:results} and refer to this property suite and parameterisation.
+
+\begin{table}[ht]
+    \centering
+    \caption{The adapted safety properties. A violation of any property renders the input \textit{UNSAFE}.\label{tab:prop-defs}}
+    \begin{tabular}{clp{0.6\linewidth}}
+        \toprule
+        Tag & Name & Informal Description \\ \midrule
+        $\mathbf{p_1}$ & Classification Robustness (CR) & The network must predict the correct ground-truth class for all perturbed inputs. \\[4pt]
+        $\mathbf{p_2}$ & Adapted SCR & The correct-class logit must not drop by more than a relative offset ($\Delta_{\text{conf}}$). \\[4pt]
+        $\mathbf{p_3}$ & Combined Robustness & Both class consistency (\(\mathbf{p_1}\)) and confidence (\(\mathbf{p_2}\)) must hold simultaneously. \\[4pt]
+        $\mathbf{p_4}$ & Logit Stability & The absolute change of every logit must be bounded by its own relative offset ($\Delta_{\text{stab},i}$). \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+  \subsection{Verification Tools and Methods}
+  
+  To verify these properties, we employ two complementary verification frameworks known for their different strengths and underlying mechanisms: \(\alpha,\beta\)-CROWN and Marabou.
+  
+
+  \paragraph{\(\alpha,\beta\)-CROWN:} 
+A state-of-the-art neural network verifier leveraging optimized linear relaxation-based bound propagation combined with branch-and-bound search techniques \cite{wang2021beta, zhang2018efficient, xu2021fast, zhou2024scalable}. It is particularly recognized for its computational efficiency and scalability, making it highly effective for verifying \(L_\infty\)-robustness properties. Given a nominal input \(\boldsymbol{\hat{x}}\) and perturbation bound \(\varepsilon\), \(\alpha,\beta\)-CROWN computes tight lower and upper bounds \([l, u]\) for the network's outputs within the defined perturbation region \(\mathbb{B}_\infty(\boldsymbol{\hat{x}}; \varepsilon)\). It then employs branch-and-bound strategies to iteratively refine these bounds, effectively handling cases where initial approximations are insufficiently precise. If the refined output bounds conclusively satisfy the verification criteria—for instance, verifying that the range is entirely within a specified safe region or that the variation is bounded by a defined threshold (e.g., for Logit Stability $\mathbf{p_4}$: verifying that the computed interval for the $i$-th logit, $[l_i, u_i]$, is fully contained within the safe region $[\mathcal{N}(\boldsymbol{\hat{x}})_i - \Delta_{\text{stab},i}, \mathcal{N}(\boldsymbol{\hat{x}})_i + \Delta_{\text{stab},i}]$)—then the property is reported as verified (UNSAT). In cases where the computed bounds remain imprecise despite refinement, \(\alpha,\beta\)-CROWN may produce an "unknown" result or exceed predefined computational time limits. While primarily designed to verify robustness properties efficiently, \(\alpha,\beta\)-CROWN can also identify concrete counterexamples under certain conditions. For our benchmarking, we utilized the verifier's standard configuration, optimized explicitly for robustness verification tasks.
+
+  
+  \paragraph{Marabou:} This is a complete verifier based on the Simplex algorithm, extended with specialized techniques for handling ReLU activations using SMT (Satisfiability Modulo Theories) solving \cite{katz2019marabou}. Marabou performs an exact analysis and can definitively prove a property holds (UNSAT) or provide a concrete counterexample \(\boldsymbol{x} \in \mathbb{B}_\infty(\boldsymbol{\hat{x}}; \varepsilon)\) demonstrating a violation (SAT) if one exists within the specified input region. Its precision comes at the cost of potentially higher computational time, and it may struggle to scale to very large networks or complex properties, possibly resulting in timeouts. We use Marabou with its default settings and ReLU handling strategies.
+
+  \paragraph{NeuralSat:}  This recent verifier adapts the DPLL(T) framework to neural networks.  \neuralsat{} combines an abstraction-based deductive theory solver with conflict clause learning and search restarts to scale verification \cite{duong2024dpllt}.  It supports a wide range of network architectures and activation functions and has achieved competitive performance in recent verification competitions \cite{duong2025neuralsat}.  \neuralsat{} aims to balance completeness and scalability; we include it in our pipeline, but due to ongoing integration its quantitative results are not yet available.
+  
+  
+  Our verification pipeline uses these tools to assess properties by encoding each as a constraint that must hold for all admissible perturbations \(\boldsymbol{x} \in \mathbb{B}_\infty(\boldsymbol{\hat{x}}; \varepsilon)\). The process involves:
+  \begin{itemize}
+      \item \emph{Property Analysis:} Evaluating if small input perturbations can lead to violations of the specified robustness properties ($\mathbf{p_1}$, $\mathbf{p_2}$, $\mathbf{p_3}$, $\mathbf{p_4}$).
+      \item \emph{Counterexample Identification:} When a solver reports \emph{SAT}, it provides a concrete input \(\boldsymbol{x}\) within the \(\varepsilon\)-ball that violates the property, revealing a specific failure mode.
+      \item \emph{Formal Guarantee:} An \emph{UNSAT} result signifies that no counterexample exists within the analyzed input region \(\mathbb{B}_\infty(\boldsymbol{\hat{x}}; \varepsilon)\), providing a formal guarantee of local robustness for that specific property and input region.
+  \end{itemize}
+  If a tool times out before reaching a conclusion, the result remains inconclusive for that specific verification query. Nonetheless, this combined approach aims to uncover vulnerabilities that standard testing might miss while providing strong assurances when verification succeeds.

@@ -1,0 +1,1670 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{none/global//global/global}
+  \entry{huang2020survey}{article}{}
+    \name{author}{8}{}{%
+      {{hash=HX}{%
+         family={Huang},
+         familyi={H\bibinitperiod},
+         given={Xiaowei},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=KD}{%
+         family={Kroening},
+         familyi={K\bibinitperiod},
+         given={Daniel},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=KM}{%
+         family={Kwiatkowska},
+         familyi={K\bibinitperiod},
+         given={Marta},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=RW}{%
+         family={Ruan},
+         familyi={R\bibinitperiod},
+         given={Wenjie},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=SY}{%
+         family={Sun},
+         familyi={S\bibinitperiod},
+         given={Youcheng},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=TE}{%
+         family={Thamo},
+         familyi={T\bibinitperiod},
+         given={Emese},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=WM}{%
+         family={Wu},
+         familyi={W\bibinitperiod},
+         given={Min},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=YX}{%
+         family={Yi},
+         familyi={Y\bibinitperiod},
+         given={Xinping},
+         giveni={X\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{HX+1}
+    \strng{fullhash}{HXKDKMRWSYTEWMYX1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1}
+    \field{pages}{194\bibrangedash 223}
+    \field{title}{Safety and Trustworthiness of Deep Neural Networks: A Survey}
+    \field{volume}{48}
+    \field{journaltitle}{IEEE Transactions on Software Engineering}
+    \field{year}{2020}
+  \endentry
+
+  \entry{liu2021algorithms}{article}{}
+    \name{author}{6}{}{%
+      {{hash=LC}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Changliu},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=AT}{%
+         family={Arnon},
+         familyi={A\bibinitperiod},
+         given={Tomer},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=LC}{%
+         family={Lazarus},
+         familyi={L\bibinitperiod},
+         given={Christopher},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=SC}{%
+         family={Strong},
+         familyi={S\bibinitperiod},
+         given={Clark},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=BC}{%
+         family={Barrett},
+         familyi={B\bibinitperiod},
+         given={Clark},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Now Publishers, Inc.}%
+    }
+    \strng{namehash}{LC+1}
+    \strng{fullhash}{LCATLCSCBCKMJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{3-4}
+    \field{pages}{244\bibrangedash 404}
+    \field{title}{Algorithms for verifying deep neural networks}
+    \field{volume}{4}
+    \field{journaltitle}{Foundations and Trends{\textregistered} in
+  Optimization}
+    \field{year}{2021}
+  \endentry
+
+  \entry{JMLR:v25:23-0119}{article}{}
+    \name{author}{4}{}{%
+      {{hash=KM}{%
+         family={K{{\"o}}nig},
+         familyi={K\bibinitperiod},
+         given={Matthias},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=BAW}{%
+         family={Bosman},
+         familyi={B\bibinitperiod},
+         given={Annelot\bibnamedelima W.},
+         giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+      {{hash=HHH}{%
+         family={Hoos},
+         familyi={H\bibinitperiod},
+         given={Holger\bibnamedelima H.},
+         giveni={H\bibinitperiod\bibinitdelim H\bibinitperiod},
+      }}%
+      {{hash=vRJN}{%
+         prefix={van},
+         prefixi={v\bibinitperiod},
+         family={Rijn},
+         familyi={R\bibinitperiod},
+         given={Jan\bibnamedelima N.},
+         giveni={J\bibinitperiod\bibinitdelim N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KM+1}
+    \strng{fullhash}{KMBAWHHHRJNv1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{12}
+    \field{pages}{1\bibrangedash 53}
+    \field{title}{Critically Assessing the State of the Art in Neural Network
+  Verification}
+    \verb{url}
+    \verb http://jmlr.org/papers/v25/23-0119.html
+    \endverb
+    \field{volume}{25}
+    \field{journaltitle}{Journal of Machine Learning Research}
+    \field{year}{2024}
+  \endentry
+
+  \entry{katz2019marabou}{inproceedings}{}
+    \name{author}{13}{}{%
+      {{hash=KG}{%
+         family={Katz},
+         familyi={K\bibinitperiod},
+         given={Guy},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=HDA}{%
+         family={Huang},
+         familyi={H\bibinitperiod},
+         given={Derek\bibnamedelima A.},
+         giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=ID}{%
+         family={Ibeling},
+         familyi={I\bibinitperiod},
+         given={Duligur},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=JK}{%
+         family={Julian},
+         familyi={J\bibinitperiod},
+         given={Kyle},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=LC}{%
+         family={Lazarus},
+         familyi={L\bibinitperiod},
+         given={Christopher},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=LR}{%
+         family={Lim},
+         familyi={L\bibinitperiod},
+         given={Rachel},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=SP}{%
+         family={Shah},
+         familyi={S\bibinitperiod},
+         given={Parth},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=TS}{%
+         family={Thakoor},
+         familyi={T\bibinitperiod},
+         given={Shantanu},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=WH}{%
+         family={Wu},
+         familyi={W\bibinitperiod},
+         given={Haoze},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=ZA}{%
+         family={Zelji{\'{c}}},
+         familyi={Z\bibinitperiod},
+         given={Aleksandar},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=DDL}{%
+         family={Dill},
+         familyi={D\bibinitperiod},
+         given={David\bibnamedelima L.},
+         giveni={D\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J.},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=BC}{%
+         family={Barrett},
+         familyi={B\bibinitperiod},
+         given={Clark},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \name{editor}{2}{}{%
+      {{hash=DI}{%
+         family={Dillig},
+         familyi={D\bibinitperiod},
+         given={Isil},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=TS}{%
+         family={Tasiran},
+         familyi={T\bibinitperiod},
+         given={Serdar},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer International Publishing}%
+    }
+    \strng{namehash}{KG+1}
+    \strng{fullhash}{KGHDAIDJKLCLRSPTSWHZADDLKMJBC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Deep neural networks are revolutionizing the way complex systems are
+  designed. Consequently, there is a pressing need for tools and techniques for
+  network analysis and certification. To help in addressing that need, we
+  present Marabou, a framework for verifying deep neural networks. Marabou is
+  an SMT-based tool that can answer queries about a network's properties by
+  transforming these queries into constraint satisfaction problems. It can
+  accommodate networks with different activation functions and topologies, and
+  it performs high-level reasoning on the network that can curtail the search
+  space and improve performance. It also supports parallel execution to further
+  enhance scalability. Marabou accepts multiple input formats, including
+  protocol buffer files generated by the popular TensorFlow framework for
+  neural networks. We describe the system architecture and main components,
+  evaluate the technique and discuss ongoing work.%
+    }
+    \field{booktitle}{Computer Aided Verification}
+    \field{isbn}{978-3-030-25540-4}
+    \field{pages}{443\bibrangedash 452}
+    \field{title}{The Marabou Framework for Verification and Analysis of Deep
+  Neural Networks}
+    \list{location}{1}{%
+      {Cham}%
+    }
+    \field{year}{2019}
+  \endentry
+
+  \entry{carlini2019evaluating}{inproceedings}{}
+    \name{author}{9}{}{%
+      {{hash=CN}{%
+         family={Carlini},
+         familyi={C\bibinitperiod},
+         given={Nicholas},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=AA}{%
+         family={Athalye},
+         familyi={A\bibinitperiod},
+         given={Anish},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=PN}{%
+         family={Papernot},
+         familyi={P\bibinitperiod},
+         given={Nicolas},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=BW}{%
+         family={Brendel},
+         familyi={B\bibinitperiod},
+         given={Wieland},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=RJ}{%
+         family={Rauber},
+         familyi={R\bibinitperiod},
+         given={Jonas},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=TD}{%
+         family={Tsipras},
+         familyi={T\bibinitperiod},
+         given={Dimitris},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=GI}{%
+         family={Goodfellow},
+         familyi={G\bibinitperiod},
+         given={Ian},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=MA}{%
+         family={Madry},
+         familyi={M\bibinitperiod},
+         given={Aleksander},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=KA}{%
+         family={Kurakin},
+         familyi={K\bibinitperiod},
+         given={Alexey},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{CN+1}
+    \strng{fullhash}{CNAAPNBWRJTDGIMAKA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{2019 IEEE Symposium on Security and Privacy (SP)}
+    \field{pages}{1011\bibrangedash 1027}
+    \field{title}{On evaluating the robustness of neural networks}
+    \field{year}{2019}
+  \endentry
+
+  \entry{katz2017reluplex}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=KG}{%
+         family={Katz},
+         familyi={K\bibinitperiod},
+         given={Guy},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=BC}{%
+         family={Barrett},
+         familyi={B\bibinitperiod},
+         given={Clark},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=DDL}{%
+         family={Dill},
+         familyi={D\bibinitperiod},
+         given={David\bibnamedelima L},
+         giveni={D\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+      {{hash=JK}{%
+         family={Julian},
+         familyi={J\bibinitperiod},
+         given={Kyle},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{KG+1}
+    \strng{fullhash}{KGBCDDLJKKMJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Computer Aided Verification: 29th International
+  Conference, CAV 2017}
+    \field{pages}{97\bibrangedash 117}
+    \field{title}{Reluplex: An Efficient SMT Solver for Verifying Deep Neural
+  Networks}
+    \field{year}{2017}
+  \endentry
+
+  \entry{ehlers2017planet}{inproceedings}{}
+    \name{author}{1}{}{%
+      {{hash=ER}{%
+         family={Ehlers},
+         familyi={E\bibinitperiod},
+         given={R{\"u}diger},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ER1}
+    \strng{fullhash}{ER1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Computer Aided Verification (CAV)}
+    \field{series}{LNCS}
+    \field{title}{Formal verification of piece-wise linear feed-forward neural
+  networks}
+    \field{year}{2017}
+  \endentry
+
+  \entry{tjeng2019milp}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=TV}{%
+         family={Tjeng},
+         familyi={T\bibinitperiod},
+         given={Vincent},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=XK}{%
+         family={Xiao},
+         familyi={X\bibinitperiod},
+         given={Kai},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=TR}{%
+         family={Tedrake},
+         familyi={T\bibinitperiod},
+         given={Russ},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TVXKTR1}
+    \strng{fullhash}{TVXKTR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Learning Representations
+  (ICLR)}
+    \field{title}{Evaluating robustness of neural networks with mixed integer
+  programming}
+    \field{year}{2019}
+  \endentry
+
+  \entry{gehr2018ai2}{inproceedings}{}
+    \name{author}{6}{}{%
+      {{hash=GT}{%
+         family={Gehr},
+         familyi={G\bibinitperiod},
+         given={Timon},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Mirman},
+         familyi={M\bibinitperiod},
+         given={Matthew},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=DCD}{%
+         family={Drachsler-Cohen},
+         familyi={D\bibinithyphendelim C\bibinitperiod},
+         given={Dana},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=TP}{%
+         family={Tsankov},
+         familyi={T\bibinitperiod},
+         given={Petar},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=CS}{%
+         family={Chaudhuri},
+         familyi={C\bibinitperiod},
+         given={Swarat},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=VM}{%
+         family={Vechev},
+         familyi={V\bibinitperiod},
+         given={Martin},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{GT+1}
+    \strng{fullhash}{GTMMDCDTPCSVM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{2018 IEEE Symposium on Security and Privacy (SP)}
+    \field{pages}{3\bibrangedash 18}
+    \field{title}{Ai2: Safety and robustness certification of neural networks
+  with abstract interpretation}
+    \field{year}{2018}
+  \endentry
+
+  \entry{singh2019abstract}{article}{}
+    \name{author}{4}{}{%
+      {{hash=SG}{%
+         family={Singh},
+         familyi={S\bibinitperiod},
+         given={Gagandeep},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=GT}{%
+         family={Gehr},
+         familyi={G\bibinitperiod},
+         given={Timon},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=PM}{%
+         family={P{\"u}schel},
+         familyi={P\bibinitperiod},
+         given={Markus},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=VM}{%
+         family={Vechev},
+         familyi={V\bibinitperiod},
+         given={Martin},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {ACM New York, NY, USA}%
+    }
+    \strng{namehash}{SG+1}
+    \strng{fullhash}{SGGTPMVM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{POPL}
+    \field{pages}{1\bibrangedash 30}
+    \field{title}{An abstract domain for certifying neural networks}
+    \field{volume}{3}
+    \field{journaltitle}{Proceedings of the ACM on Programming Languages}
+    \field{year}{2019}
+  \endentry
+
+  \entry{zhang2018efficient}{article}{}
+    \name{author}{5}{}{%
+      {{hash=ZH}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Huan},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=WTW}{%
+         family={Weng},
+         familyi={W\bibinitperiod},
+         given={Tsui-Wei},
+         giveni={T\bibinithyphendelim W\bibinitperiod},
+      }}%
+      {{hash=CPY}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Pin-Yu},
+         giveni={P\bibinithyphendelim Y\bibinitperiod},
+      }}%
+      {{hash=HCJ}{%
+         family={Hsieh},
+         familyi={H\bibinitperiod},
+         given={Cho-Jui},
+         giveni={C\bibinithyphendelim J\bibinitperiod},
+      }}%
+      {{hash=DL}{%
+         family={Daniel},
+         familyi={D\bibinitperiod},
+         given={Luca},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZH+1}
+    \strng{fullhash}{ZHWTWCPYHCJDL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{4939\bibrangedash 4948}
+    \field{title}{Efficient Neural Network Robustness Certification with
+  General Activation Functions}
+    \verb{url}
+    \verb https://arxiv.org/pdf/1811.00866.pdf
+    \endverb
+    \field{volume}{31}
+    \field{journaltitle}{Advances in Neural Information Processing Systems}
+    \field{year}{2018}
+  \endentry
+
+  \entry{xu2021fast}{inproceedings}{}
+    \name{author}{7}{}{%
+      {{hash=XK}{%
+         family={Xu},
+         familyi={X\bibinitperiod},
+         given={Kaidi},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=ZH}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Huan},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=WS}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Shiqi},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=WY}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Yihan},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=JS}{%
+         family={Jana},
+         familyi={J\bibinitperiod},
+         given={Suman},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=LX}{%
+         family={Lin},
+         familyi={L\bibinitperiod},
+         given={Xue},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=HCJ}{%
+         family={Hsieh},
+         familyi={H\bibinitperiod},
+         given={Cho-Jui},
+         giveni={C\bibinithyphendelim J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{XK+1}
+    \strng{fullhash}{XKZHWSWYJSLXHCJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Learning Representations}
+    \field{title}{{Fast and Complete}: Enabling Complete Neural Network
+  Verification with Rapid and Massively Parallel Incomplete Verifiers}
+    \verb{url}
+    \verb https://openreview.net/forum?id=nVZtXBI6LNn
+    \endverb
+    \field{year}{2021}
+  \endentry
+
+  \entry{wang2021beta}{article}{}
+    \name{author}{7}{}{%
+      {{hash=WS}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Shiqi},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=ZH}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Huan},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=XK}{%
+         family={Xu},
+         familyi={X\bibinitperiod},
+         given={Kaidi},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=LX}{%
+         family={Lin},
+         familyi={L\bibinitperiod},
+         given={Xue},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=JS}{%
+         family={Jana},
+         familyi={J\bibinitperiod},
+         given={Suman},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=HCJ}{%
+         family={Hsieh},
+         familyi={H\bibinitperiod},
+         given={Cho-Jui},
+         giveni={C\bibinithyphendelim J\bibinitperiod},
+      }}%
+      {{hash=KJZ}{%
+         family={Kolter},
+         familyi={K\bibinitperiod},
+         given={J\bibnamedelima Zico},
+         giveni={J\bibinitperiod\bibinitdelim Z\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{WS+1}
+    \strng{fullhash}{WSZHXKLXJSHCJKJZ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{{Beta-CROWN}: Efficient bound propagation with per-neuron
+  split constraints for complete and incomplete neural network verification}
+    \field{volume}{34}
+    \field{journaltitle}{Advances in Neural Information Processing Systems}
+    \field{year}{2021}
+  \endentry
+
+  \entry{zhang2019crownibp}{inproceedings}{}
+    \true{moreauthor}
+    \true{morelabelname}
+    \name{author}{2}{}{%
+      {{hash=ZH}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Huan},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=XH}{%
+         family={Xu},
+         familyi={X\bibinitperiod},
+         given={Hongge},
+         giveni={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZHXH+1}
+    \strng{fullhash}{ZHXH+1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Advances in Neural Information Processing Systems
+  (NeurIPS)}
+    \field{title}{Towards Stable and Efficient Training of
+  Verification-Friendly Networks}
+    \field{year}{2019}
+  \endentry
+
+  \entry{wong2018provable}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=WE}{%
+         family={Wong},
+         familyi={W\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=KJZ}{%
+         family={Kolter},
+         familyi={K\bibinitperiod},
+         given={J\bibnamedelima Zico},
+         giveni={J\bibinitperiod\bibinitdelim Z\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{WEKJZ1}
+    \strng{fullhash}{WEKJZ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Learning Representations
+  (ICLR)}
+    \field{title}{Provable defenses via the convex outer adversarial polytope}
+    \verb{url}
+    \verb https://openreview.net/forum?id=H1g0piA9tQ
+    \endverb
+    \field{year}{2018}
+  \endentry
+
+  \entry{raghunathan2018certified}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=RA}{%
+         family={Raghunathan},
+         familyi={R\bibinitperiod},
+         given={Aditi},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Steinhardt},
+         familyi={S\bibinitperiod},
+         given={Jacob},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=LP}{%
+         family={Liang},
+         familyi={L\bibinitperiod},
+         given={Percy},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{RASJLP1}
+    \strng{fullhash}{RASJLP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Advances in Neural Information Processing Systems
+  (NeurIPS)}
+    \field{title}{Certified defenses against adversarial examples}
+    \field{year}{2018}
+  \endentry
+
+  \entry{zhou2024scalable}{article}{}
+    \name{author}{4}{}{%
+      {{hash=ZD}{%
+         family={Zhou},
+         familyi={Z\bibinitperiod},
+         given={Duo},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=BC}{%
+         family={Brix},
+         familyi={B\bibinitperiod},
+         given={Christopher},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=HGA}{%
+         family={Hanasusanto},
+         familyi={H\bibinitperiod},
+         given={Grani\bibnamedelima A},
+         giveni={G\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=ZH}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Huan},
+         giveni={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZD+1}
+    \strng{fullhash}{ZDBCHGAZH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Scalable Neural Network Verification with Branch-and-bound
+  Inferred Cutting Planes}
+    \field{journaltitle}{arXiv preprint arXiv:2501.00200}
+    \field{year}{2024}
+  \endentry
+
+  \entry{duong2024dpllt}{article}{}
+    \name{author}{3}{}{%
+      {{hash=DH}{%
+         family={Duong},
+         familyi={D\bibinitperiod},
+         given={Hai},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=NT}{%
+         family={Nguyen},
+         familyi={N\bibinitperiod},
+         given={ThanhVu},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=DMB}{%
+         family={Dwyer},
+         familyi={D\bibinitperiod},
+         given={Matthew\bibnamedelima B.},
+         giveni={M\bibinitperiod\bibinitdelim B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DHNTDMB1}
+    \strng{fullhash}{DHNTDMB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{note}{\url{https://doi.org/10.48550/arXiv.2307.10266}}
+    \field{title}{A DPLL(T) framework for verifying deep neural networks}
+    \field{journaltitle}{arXiv preprint arXiv:2307.10266}
+    \field{year}{2024}
+  \endentry
+
+  \entry{bak2021second}{inproceedings}{}
+    \true{moreauthor}
+    \true{morelabelname}
+    \name{author}{6}{}{%
+      {{hash=BS}{%
+         family={Bak},
+         familyi={B\bibinitperiod},
+         given={Stanley},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=BC}{%
+         family={Brix},
+         familyi={B\bibinitperiod},
+         given={Christian},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=JTT}{%
+         family={Johnson},
+         familyi={J\bibinitperiod},
+         given={Taylor\bibnamedelima T},
+         giveni={T\bibinitperiod\bibinitdelim T\bibinitperiod},
+      }}%
+      {{hash=LC}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Changliu},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=THD}{%
+         family={Tran},
+         familyi={T\bibinitperiod},
+         given={Hoang-Dung},
+         giveni={H\bibinithyphendelim D\bibinitperiod},
+      }}%
+      {{hash=XW}{%
+         family={Xiang},
+         familyi={X\bibinitperiod},
+         given={Weiming},
+         giveni={W\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{BS+1}
+    \strng{fullhash}{BSBCJTTLCTHDXW+1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Computer Aided Verification}
+    \field{pages}{3\bibrangedash 34}
+    \field{title}{The second international verification of neural networks
+  competition (VNN-COMP 2021): summary and results}
+    \field{year}{2021}
+  \endentry
+
+  \entry{brix2023fourth}{inproceedings}{}
+    \true{moreauthor}
+    \true{morelabelname}
+    \name{author}{7}{}{%
+      {{hash=BC}{%
+         family={Brix},
+         familyi={B\bibinitperiod},
+         given={Christian},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=IR}{%
+         family={Ivanov},
+         familyi={I\bibinitperiod},
+         given={Radoslav},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=JTT}{%
+         family={Johnson},
+         familyi={J\bibinitperiod},
+         given={Taylor\bibnamedelima T},
+         giveni={T\bibinitperiod\bibinitdelim T\bibinitperiod},
+      }}%
+      {{hash=LC}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Changliu},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=SM}{%
+         family={Shriver},
+         familyi={S\bibinitperiod},
+         given={Mark},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=THD}{%
+         family={Tran},
+         familyi={T\bibinitperiod},
+         given={Hoang-Dung},
+         giveni={H\bibinithyphendelim D\bibinitperiod},
+      }}%
+      {{hash=XW}{%
+         family={Xiang},
+         familyi={X\bibinitperiod},
+         given={Weiming},
+         giveni={W\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{BC+1}
+    \strng{fullhash}{BCIRJTTLCSMTHDXW+1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Computer Aided Verification}
+    \field{pages}{3\bibrangedash 34}
+    \field{title}{The Fourth International Verification of Neural Networks
+  Competition (VNN-COMP 2022): Summary and Results}
+    \field{year}{2023}
+  \endentry
+
+  \entry{brix2024fifth}{article}{}
+    \name{author}{4}{}{%
+      {{hash=BC}{%
+         family={Brix},
+         familyi={B\bibinitperiod},
+         given={Christopher},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=BS}{%
+         family={Bak},
+         familyi={B\bibinitperiod},
+         given={Stanley},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=JTT}{%
+         family={Johnson},
+         familyi={J\bibinitperiod},
+         given={Taylor\bibnamedelima T},
+         giveni={T\bibinitperiod\bibinitdelim T\bibinitperiod},
+      }}%
+      {{hash=WH}{%
+         family={Wu},
+         familyi={W\bibinitperiod},
+         given={Haoze},
+         giveni={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BC+2}
+    \strng{fullhash}{BCBSJTTWH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{The Fifth International Verification of Neural Networks
+  Competition (VNN-COMP 2024): Summary and Results}
+    \field{journaltitle}{arXiv preprint arXiv:2412.19985}
+    \field{year}{2024}
+  \endentry
+
+  \entry{shriver2021dnnv}{inproceedings}{}
+    \name{author}{6}{}{%
+      {{hash=SM}{%
+         family={Shriver},
+         familyi={S\bibinitperiod},
+         given={Mark},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=THD}{%
+         family={Tran},
+         familyi={T\bibinitperiod},
+         given={Hoang-Dung},
+         giveni={H\bibinithyphendelim D\bibinitperiod},
+      }}%
+      {{hash=XW}{%
+         family={Xiang},
+         familyi={X\bibinitperiod},
+         given={Weiming},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=MP}{%
+         family={Musau},
+         familyi={M\bibinitperiod},
+         given={Patrick},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=LDM}{%
+         family={Lopez},
+         familyi={L\bibinitperiod},
+         given={Diego\bibnamedelima Manzanas},
+         giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=JTT}{%
+         family={Johnson},
+         familyi={J\bibinitperiod},
+         given={Taylor\bibnamedelima T},
+         giveni={T\bibinitperiod\bibinitdelim T\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer Nature}%
+    }
+    \strng{namehash}{SM+1}
+    \strng{fullhash}{SMTHDXWMPLDMJTT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Tools and Algorithms for the Construction and Analysis of
+  Systems: 27th International Conference, TACAS 2021, Held as Part of the
+  European Joint Conferences on Theory and Practice of Software, ETAPS 2021,
+  Luxembourg City, Luxembourg, March 27--April 1, 2021, Proceedings, Part II
+  27}
+    \field{pages}{233\bibrangedash 240}
+    \field{title}{DNNV: A Framework for Deep Neural Network Verification}
+    \field{year}{2021}
+  \endentry
+
+  \entry{bojarski2016end}{inproceedings}{}
+    \true{moreauthor}
+    \true{morelabelname}
+    \name{author}{10}{}{%
+      {{hash=BM}{%
+         family={Bojarski},
+         familyi={B\bibinitperiod},
+         given={Mariusz},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=DTD}{%
+         family={Del\bibnamedelima Testa},
+         familyi={D\bibinitperiod\bibinitdelim T\bibinitperiod},
+         given={Davide},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=DD}{%
+         family={Dworakowski},
+         familyi={D\bibinitperiod},
+         given={Daniel},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=FB}{%
+         family={Firner},
+         familyi={F\bibinitperiod},
+         given={Bernhard},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=FB}{%
+         family={Flepp},
+         familyi={F\bibinitperiod},
+         given={Beat},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=GP}{%
+         family={Goyal},
+         familyi={G\bibinitperiod},
+         given={Prasoon},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=JLD}{%
+         family={Jackel},
+         familyi={J\bibinitperiod},
+         given={Lawrence\bibnamedelima D},
+         giveni={L\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Monfort},
+         familyi={M\bibinitperiod},
+         given={Mathew},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=MU}{%
+         family={Muller},
+         familyi={M\bibinitperiod},
+         given={Urs},
+         giveni={U\bibinitperiod},
+      }}%
+      {{hash=ZJ}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Jiakai},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BM+1}
+    \strng{fullhash}{BMDTDDDFBFBGPJLDMMMUZJ+1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{NIPS Deep Learning for Action and Interaction Workshop}
+    \field{title}{End to end learning for self-driving cars}
+    \field{year}{2016}
+  \endentry
+
+  \entry{tran2020verification}{inproceedings}{}
+    \name{author}{7}{}{%
+      {{hash=THD}{%
+         family={Tran},
+         familyi={T\bibinitperiod},
+         given={Hoang-Dung},
+         giveni={H\bibinithyphendelim D\bibinitperiod},
+      }}%
+      {{hash=LDM}{%
+         family={Lopez},
+         familyi={L\bibinitperiod},
+         given={Diego\bibnamedelima Manzanas},
+         giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=MP}{%
+         family={Musau},
+         familyi={M\bibinitperiod},
+         given={Patrick},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=YX}{%
+         family={Yang},
+         familyi={Y\bibinitperiod},
+         given={Xiaodong},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=NLV}{%
+         family={Nguyen},
+         familyi={N\bibinitperiod},
+         given={Luan\bibnamedelima Viet},
+         giveni={L\bibinitperiod\bibinitdelim V\bibinitperiod},
+      }}%
+      {{hash=XW}{%
+         family={Xiang},
+         familyi={X\bibinitperiod},
+         given={Weiming},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=JTT}{%
+         family={Johnson},
+         familyi={J\bibinitperiod},
+         given={Taylor\bibnamedelima T},
+         giveni={T\bibinitperiod\bibinitdelim T\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{THD+1}
+    \strng{fullhash}{THDLDMMPYXNLVXWJTT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Computer Aided Verification}
+    \field{pages}{349\bibrangedash 372}
+    \field{title}{Verification of deep convolutional neural networks using
+  image stars}
+    \field{year}{2020}
+  \endentry
+
+  \entry{dreossi2019verifai}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=DT}{%
+         family={Dreossi},
+         familyi={D\bibinitperiod},
+         given={Tommaso},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=DA}{%
+         family={Donze},
+         familyi={D\bibinitperiod},
+         given={Alexandre},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SSA}{%
+         family={Seshia},
+         familyi={S\bibinitperiod},
+         given={Sanjit\bibnamedelima A},
+         giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{DTDASSA1}
+    \strng{fullhash}{DTDASSA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Computer Aided Verification}
+    \field{pages}{432\bibrangedash 442}
+    \field{title}{VerifAI: A toolkit for the formal design and analysis of
+  artificial intelligence-based systems}
+    \field{year}{2019}
+  \endentry
+
+  \entry{koopman2016challenges}{misc}{}
+    \name{author}{2}{}{%
+      {{hash=KP}{%
+         family={Koopman},
+         familyi={K\bibinitperiod},
+         given={Philip},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=WM}{%
+         family={Wagner},
+         familyi={W\bibinitperiod},
+         given={Michael},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {SAE Technical Paper}%
+    }
+    \strng{namehash}{KPWM1}
+    \strng{fullhash}{KPWM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Challenges in autonomous vehicle testing and validation}
+    \field{year}{2016}
+  \endentry
+
+  \entry{casadio2022neural}{inproceedings}{}
+    \name{author}{7}{}{%
+      {{hash=CM}{%
+         family={Casadio},
+         familyi={C\bibinitperiod},
+         given={Marco},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=KE}{%
+         family={Komendantskaya},
+         familyi={K\bibinitperiod},
+         given={Ekaterina},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=DML}{%
+         family={Daggitt},
+         familyi={D\bibinitperiod},
+         given={Matthew\bibnamedelima L},
+         giveni={M\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+      {{hash=KW}{%
+         family={Kokke},
+         familyi={K\bibinitperiod},
+         given={Wen},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=KG}{%
+         family={Katz},
+         familyi={K\bibinitperiod},
+         given={Guy},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=AG}{%
+         family={Amir},
+         familyi={A\bibinitperiod},
+         given={Guy},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=RI}{%
+         family={Refaeli},
+         familyi={R\bibinitperiod},
+         given={Idan},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{CM+1}
+    \strng{fullhash}{CMKEDMLKWKGAGRI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International conference on computer aided verification}
+    \field{pages}{219\bibrangedash 231}
+    \field{title}{Neural network robustness as a verification property: a
+  principled case study}
+    \field{year}{2022}
+  \endentry
+
+  \entry{ehlers2017formal}{inproceedings}{}
+    \name{author}{1}{}{%
+      {{hash=ER}{%
+         family={Ehlers},
+         familyi={E\bibinitperiod},
+         given={Ruediger},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{ER2}
+    \strng{fullhash}{ER2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International symposium on automated technology for
+  verification and analysis}
+    \field{pages}{269\bibrangedash 286}
+    \field{title}{Formal verification of piece-wise linear feed-forward neural
+  networks}
+    \field{year}{2017}
+  \endentry
+
+  \entry{eran}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=SG}{%
+         family={Singh},
+         familyi={S\bibinitperiod},
+         given={Gagandeep},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=GT}{%
+         family={Gehr},
+         familyi={G\bibinitperiod},
+         given={Timon},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=PM}{%
+         family={P{\"u}schel},
+         familyi={P\bibinitperiod},
+         given={Markus},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=VM}{%
+         family={Vechev},
+         familyi={V\bibinitperiod},
+         given={Martin},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {ACM New York, NY, USA}%
+    }
+    \strng{namehash}{SG+1}
+    \strng{fullhash}{SGGTPMVM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Proceedings of the ACM on Programming Languages}
+    \field{number}{POPL}
+    \field{pages}{1\bibrangedash 31}
+    \field{title}{An abstract interpretation-based framework for input-aware
+  verification of neural networks}
+    \field{volume}{3}
+    \field{year}{2019}
+  \endentry
+
+  \entry{huang2019reachnn}{article}{}
+    \name{author}{5}{}{%
+      {{hash=HC}{%
+         family={Huang},
+         familyi={H\bibinitperiod},
+         given={Chao},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=FJ}{%
+         family={Fan},
+         familyi={F\bibinitperiod},
+         given={Jiameng},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=LW}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Wenchao},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=CX}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Xin},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=ZQ}{%
+         family={Zhu},
+         familyi={Z\bibinitperiod},
+         given={Qi},
+         giveni={Q\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {ACM New York, NY, USA}%
+    }
+    \strng{namehash}{HC+1}
+    \strng{fullhash}{HCFJLWCXZQ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{5s}
+    \field{pages}{1\bibrangedash 22}
+    \field{title}{Reachnn: Reachability analysis of neural-network controlled
+  systems}
+    \field{volume}{18}
+    \field{journaltitle}{ACM Transactions on Embedded Computing Systems (TECS)}
+    \field{year}{2019}
+  \endentry
+
+  \entry{sun2019formal}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=SX}{%
+         family={Sun},
+         familyi={S\bibinitperiod},
+         given={Xiaowu},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=KH}{%
+         family={Khedr},
+         familyi={K\bibinitperiod},
+         given={Haitham},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=SY}{%
+         family={Shoukry},
+         familyi={S\bibinitperiod},
+         given={Yasser},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SXKHSY1}
+    \strng{fullhash}{SXKHSY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Proceedings of the 22nd ACM International Conference on
+  Hybrid Systems: Computation and Control}
+    \field{pages}{147\bibrangedash 156}
+    \field{title}{Formal verification of neural network controlled autonomous
+  systems}
+    \field{year}{2019}
+  \endentry
+
+  \entry{habeeb2023verification}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=HO}{%
+         family={Habeeb},
+         familyi={H\bibinitperiod},
+         given={Omar},
+         giveni={O\bibinitperiod},
+      }}%
+      {{hash=ESA}{%
+         family={El-Sayed},
+         familyi={E\bibinithyphendelim S\bibinitperiod},
+         given={Ahmed},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=ENA}{%
+         family={El-Nahas},
+         familyi={E\bibinithyphendelim N\bibinitperiod},
+         given={Amr},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SY}{%
+         family={Shoukry},
+         familyi={S\bibinitperiod},
+         given={Yasser},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{HO+1}
+    \strng{fullhash}{HOESAENASY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{2023 IEEE International Conference on Robotics and
+  Automation (ICRA)}
+    \field{pages}{7350\bibrangedash 7356}
+    \field{title}{Verification of camera-based autonomous systems: A case study
+  on autonomous emergency braking}
+    \field{year}{2023}
+  \endentry
+
+  \entry{ivanov2020case}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=IR}{%
+         family={Ivanov},
+         familyi={I\bibinitperiod},
+         given={Radoslav},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=WJ}{%
+         family={Weimer},
+         familyi={W\bibinitperiod},
+         given={James},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=AR}{%
+         family={Alur},
+         familyi={A\bibinitperiod},
+         given={Rajeev},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=PGJ}{%
+         family={Pappas},
+         familyi={P\bibinitperiod},
+         given={George\bibnamedelima J},
+         giveni={G\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=LI}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Insup},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{IR+1}
+    \strng{fullhash}{IRWJARPGJLI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Proceedings of the 3rd International Workshop on
+  Verification of Neural Networks (VNN)}
+    \field{title}{A case study in assessing the scalability of neural network
+  verification for autonomous systems}
+    \field{year}{2020}
+  \endentry
+
+  \entry{dutta2019reachability}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=DS}{%
+         family={Dutta},
+         familyi={D\bibinitperiod},
+         given={Souradeep},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=CX}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Xin},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=SS}{%
+         family={Sankaranarayanan},
+         familyi={S\bibinitperiod},
+         given={Sriram},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DSCXSS1}
+    \strng{fullhash}{DSCXSS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Proceedings of the 22nd ACM International Conference on
+  Hybrid Systems: Computation and Control}
+    \field{pages}{157\bibrangedash 168}
+    \field{title}{Reachability analysis for neural feedback systems using
+  regressive polynomial rule inference}
+    \field{year}{2019}
+  \endentry
+
+  \entry{bukhari2024creating}{article}{}
+    \name{author}{5}{}{%
+      {{hash=BSAA}{%
+         family={Bukhari},
+         familyi={B\bibinitperiod},
+         given={Syed Ali\bibnamedelima Asadullah},
+         giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim
+  A\bibinitperiod},
+      }}%
+      {{hash=FT}{%
+         family={Flinkow},
+         familyi={F\bibinitperiod},
+         given={Thomas},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=IM}{%
+         family={Inkarbekov},
+         familyi={I\bibinitperiod},
+         given={Medet},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=PBA}{%
+         family={Pearlmutter},
+         familyi={P\bibinitperiod},
+         given={Barak\bibnamedelima A},
+         giveni={B\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=MR}{%
+         family={Monahan},
+         familyi={M\bibinitperiod},
+         given={Rosemary},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BSAA+1}
+    \strng{fullhash}{BSAAFTIMPBAMR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Creating a Formally Verified Neural Network for Autonomous
+  Navigation: An Experience Report}
+    \field{journaltitle}{arXiv preprint arXiv:2411.14163}
+    \field{year}{2024}
+  \endentry
+\enddatalist
+\endinput

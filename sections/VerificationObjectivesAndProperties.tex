@@ -1,0 +1,55 @@
+\subsection{Formal Verification Properties}
+\label{sec:formal-properties}
+
+Consider a labelled sample \((\boldsymbol{\hat{x}},y)\) drawn from the dataset, where
+\(y\in\{1,\ldots,C\}\) is the ground-truth class.  
+The network under verification is a mapping
+\[
+  \mathcal{N} : \mathbb{R}^{n} \longrightarrow \mathbb{R}^{C},\qquad
+  \boldsymbol{\hat{x}}\mapsto
+  \mathcal{N}(\boldsymbol{\hat{x}})
+  =\bigl(\mathcal{N}(\boldsymbol{\hat{x}})_{1},\dots,\mathcal{N}(\boldsymbol{\hat{x}})_{C}\bigr).
+\]
+We call \(\mathcal{N}(\boldsymbol{\hat{x}})\) the \emph{nominal output vector}.
+For a perturbation budget \(\varepsilon>0\) define the $\ell_{\infty}$-ball
+\[
+  \mathbb{B}_{\infty}(\boldsymbol{\hat{x}};\varepsilon)
+  \;=\;
+  \bigl\{\boldsymbol{x}\in\mathbb{R}^{n}\mid
+        \|\boldsymbol{x}-\boldsymbol{\hat{x}}\|_{\infty}\le\varepsilon\bigr\}.
+\]
+We term its elements \(\boldsymbol{x}\) \emph{perturbed inputs}, and their corresponding outputs \(\mathcal{N}(\boldsymbol{x})\) are the \emph{perturbed output vectors}.
+The formal properties below reference the ground-truth label \(y\).
+
+Following Casadio et al.~\cite{casadio2022neural} we employ three canonical
+robustness properties:
+
+\begin{itemize}
+%---------------------------------------------------------------
+\item \textbf{Classification Robustness (CR).}
+      The network must assign the correct class to every input in the
+      perturbation set:
+      \[
+        \forall\,\boldsymbol{x}\in\mathbb{B}_{\infty}(\boldsymbol{\hat{x}};\varepsilon):\quad
+        \arg\max_{i}\mathcal{N}(\boldsymbol{x})_{i}=y.
+      \]
+%---------------------------------------------------------------
+\item \textbf{Standard Robustness (SR).}
+      For a tolerance \(\delta>0\) the maximal coordinate change in the logit
+      vector is bounded by \(\delta\):
+      \[
+        \forall\,\boldsymbol{x}\in\mathbb{B}_{\infty}(\boldsymbol{\hat{x}};\varepsilon):\quad
+        \|\mathcal{N}(\boldsymbol{x})-\mathcal{N}(\boldsymbol{\hat{x}})\|_{\infty}\le\delta.
+      \]
+%---------------------------------------------------------------
+\item \textbf{Strong Classification Robustness (SCR).}
+      For a confidence floor \(\eta>0\) the logit of the correct class never
+      falls below \(\eta\):
+      \[
+        \forall\,\boldsymbol{x}\in\mathbb{B}_{\infty}(\boldsymbol{\hat{x}};\varepsilon):\quad
+        \mathcal{N}(\boldsymbol{x})_{y}\ge\eta.
+      \]
+\end{itemize}
+
+
+These three definitions form the formal foundation of our verification setup. Section~\ref{sec:task-adaptation} explains how we adapt \(\delta\) and \(\eta\) to better fit the task, while Section~\ref{sec:results} presents the specific values used for all hyper-parameters, including \(\varepsilon\).

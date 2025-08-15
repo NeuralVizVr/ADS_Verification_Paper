@@ -1,0 +1,40 @@
+\newcommand{\plotmodelgrid}[2]{%
+\begin{figure}[H]
+    \centering
+
+    \begin{subfigure}[t]{0.495\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/results/model#1_p#2_eps3.png}
+        \caption{\(\varepsilon=3/255\)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.495\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/results/model#1_p#2_eps5.png}
+        \caption{\(\varepsilon=5/255\)}
+    \end{subfigure}
+
+    \vspace{0.1cm}
+
+    \begin{subfigure}[t]{0.495\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/results/model#1_p#2_eps10.png}
+        \caption{\(\varepsilon=10/255\)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.495\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/results/model#1_p#2_eps20.png}
+        \caption{\(\varepsilon=20/255\)}
+    \end{subfigure}
+
+    \caption{
+        Verification results for Model #1, Property \(\mathbf{p_{#2}}\). 
+        \(\varepsilon\): verification bound, 
+        \(\epsilon_{\scriptscriptstyle\mathrm{PGD}}\): PGD training radius. 
+        \textcolor{customgreen}{\rule{1em}{1em}} SAFE, 
+        \textcolor{customred}{\rule{1em}{1em}} UNSAFE, 
+        \textcolor{customgray}{\rule{1em}{1em}} UNKNOWN.
+    }
+\end{figure}
+}

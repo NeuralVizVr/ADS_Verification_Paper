@@ -1,0 +1,58 @@
+\documentclass[runningheads]{llncs}
+\usepackage{longtable}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{amsmath}  
+\usepackage{algorithm} 
+\usepackage{algpseudocode}
+\usepackage{amssymb}
+\usepackage{booktabs} % For better table rules
+\usepackage{multirow} % For multirow cells in tables
+\usepackage{tikz} % For diagrams 
+\usetikzlibrary{shapes, arrows, positioning}
+\usepackage{caption} % For subfigures if needed
+\usepackage{subcaption} % For subfigures if needed
+\usepackage{pgfplots} % For plotting graphs
+\pgfplotsset{compat=1.17} % Use a recent PGFPlots version
+  
+% BibLaTeX setup (as in the original)
+\usepackage[backend=bibtex,style=numeric,sorting=none]{biblatex}
+\addbibresource{references.bib}
+% Define some colors for diagrams/plots
+\definecolor{customblue}{RGB}{60, 120, 180}
+\definecolor{customorange}{RGB}{220, 140, 40}
+\definecolor{customgreen}{RGB}{44, 160, 44}
+\definecolor{customred}{RGB}{214, 39, 40}
+\definecolor{customgray}{RGB}{153, 153, 153}
+
+\begin{document}
+
+\title{Formal Robustness Verification of Neural Network Controllers in a Simulated Autonomous Driving System: A Benchmarking Studyz}
+\author{Medet Inkarbekov\inst{1} \and Barak A. Pearlmutter\inst{1,2} \and Rosemary Monahan\inst{1,2}} 
+
+\authorrunning{M. Inkarbekov et al.}
+
+\institute{Department of Computer Science, Maynooth University, Maynooth, Ireland \\ 
+\email{medet.inkarbekov@mu.ie}
+\and
+Hamilton Institute, Maynooth University, Maynooth, Ireland}
+ 
+\maketitle 
+
+
+\input{sections/Abstract.tex}
+\input{sections/Introduction}   
+\input{sections/RelatedWork}
+
+\input{sections/MethodologyAndSystemArchitecture.tex}
+%\input{sections/PropertiesTools.tex}
+%\input{sections/ResultsFigures}
+%\input{sections/Architecture.tex} 
+
+ 
+\printbibliography
+
+\end{document}

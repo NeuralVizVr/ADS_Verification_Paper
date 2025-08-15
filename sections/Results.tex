@@ -1,0 +1,429 @@
+\section{Experimental Results and Analysis}
+\label{sec:results}
+This section presents a comprehensive analysis of our benchmarking study comparing the performance of $\alpha, \beta$-CROWN and Marabou in verifying neural network controllers for autonomous driving. We evaluated four distinct neural network models of varying complexity (991, 2649, 5160, and 10018 parameters) across four robustness properties (p1, p2, p3, and p4) with perturbation bounds ($\varepsilon$) ranging from 0 to 10/255.
+
+\begin{table}[ht]
+    \centering
+    \caption{Safety properties investigated.  A violation renders the input \textit{UNSAFE}.\label{tab:prop-defs}}
+    \begin{tabular}{clp{0.6\linewidth}}
+        \toprule
+        Tag & Name & Informal description \\ \midrule
+        $\mathbf{p_1}$ & Classification Robustness (CR) & The predicted manoeuvre (left/straight/right) must remain unchanged within the $\varepsilon$\,\slash\,255 $\ell_\infty$ neighbourhood. \\[2pt]
+        $\mathbf{p_2}$ & Strong Classification Robustness (SCR) & The logit of the correct class must remain above a threshold $\delta_{\text{conf}}$; here the threshold is taken as a fraction of the clean logit value. \\[2pt]
+        $\mathbf{p_3}$ & Combined Robustness (CR $\wedge$ SCR) & \textit{Both} conditions must hold: the class must stay unchanged \emph{and} the correct-class logit must satisfy the confidence floor. A violation of either sub-property renders the input \textit{UNSAFE}. \\[2pt]
+        $\mathbf{p_4}$ & Logit Stability (all-class bound) & Every logit must remain within $\pm\,\delta_{\text{stab}}$ of its clean value, providing coordinate-wise bounded sensitivity. \\ 
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Baseline Model Quality}\label{subsec:training}
+Figure~\ref{fig:training-metrics-all} illustrates that all models converge rapidly, with training stabilising by epoch12. As shown in Table~\ref{tab:val-acc}, both training and validation accuracies remain consistently high across models, with validation accuracies differing by less than two percentage points. These results suggest that subsequent differences in verification performance are driven by architectural complexity rather than disparities in predictive accuracy.
+
+
+\begin{table}[ht]
+    \centering
+    \caption{Training and validation  accuracy after 12~epochs.\label{tab:val-acc}}
+    \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        & \multicolumn{4}{c|}{Parameter count} \\ \cline{2-5}
+        Metric & 991 & 2649 & 5160 & 10018 \\ \hline
+        Training accuracy  (\%)   & 95.29 & 96.20 & 96.92 & 96.56 \\ \hline
+        Validation accuracy (\%) & 92.3 & 93.8 & 93.8 & 92.3 \\ \hline
+        
+    \end{tabular}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[ht]
+    \centering
+    % First row
+    \begin{minipage}{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/train_metrics991.png}
+ 
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/train_metrics2649.png}
+
+    \end{minipage}
+    
+    \vspace{0.5em} % Space between rows
+
+
+
+    % Second row
+    \begin{minipage}{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/train_metrics5160.png}
+
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/train_metrics10018.png}
+
+    \end{minipage}
+    \caption{Training and validation accuracy/loss curves over 12 epochs for four model sizes. Accuracy is plotted on the left Y-axis and loss on the right Y-axis in each plot.}
+    \label{fig:training-metrics-all}
+\end{figure}
+
+\subsection{Verification Outcomes Across Models and Properties}
+
+Figure~\ref{fig:safe_unsafe_model2649_p1} shows a representative example of the verification outcomes for Model 2649 and Property p1 (Standard Robustness). The side-by-side comparison reveals that both tools provide similar results at lower perturbation bounds but diverge as the perturbation bound increases. At $\varepsilon = 6/255$, Marabou reports more "Unknown" results than $\alpha, \beta$-CROWN, indicating a difference in completeness between the two tools.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model2649_p1.png}
+    \caption{SAFE/UNSAFE comparison for Model 2649, Property p1 (Standard Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model2649_p1}
+\end{figure}
+
+Table~\ref{tab:comprehensive_summary} provides a comprehensive summary of the verification results across all models and properties. For each property and perturbation bound, we report the percentage of instances where the property was proven to hold (SAFE), violated (UNSAFE), or could not be determined within the time limit (Unknown), along with the average verification time in seconds.
+
+\input{tables/table_comprehensive_summary}
+
+\subsection{Analysis by Property}
+
+\subsubsection{Property p1 (Standard Robustness)}
+
+Property p1 verifies that no misclassification occurs within the $\varepsilon$-ball around the input. As shown in Figure~\ref{fig:safe_unsafe_model991_p1}, both tools demonstrate similar verification capabilities at lower perturbation bounds but diverge significantly at higher values.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model991_p1.png}
+    \caption{SAFE/UNSAFE comparison for Model 991, Property p1 (Standard Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model991_p1}
+\end{figure}
+
+The verification time for Property p1 also varies significantly between the two tools, as shown in Figure~\ref{fig:time_model991_p1}. $\alpha, \beta$-CROWN consistently outperforms Marabou in terms of efficiency, especially at higher perturbation bounds.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model991_p1.png}
+    \caption{Verification time comparison for Model 991, Property p1 (Standard Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model991_p1}
+\end{figure}
+
+At $\varepsilon = 0/255$ (unperturbed inputs), both tools correctly verify that approximately 92\% of instances satisfy the property. As $\varepsilon$ increases to 3/255, $\alpha, \beta$-CROWN maintains a higher rate of definitive results compared to Marabou, with Marabou reporting more instances as "Unknown." This gap widens at $\varepsilon = 6/255$, where Marabou cannot determine the outcome for a significant number of instances.
+
+Table~\ref{tab:p1_tool_comparison} provides a detailed comparison of the two tools for Property p1 across all models and perturbation bounds.
+
+\input{tables/table_p1_tool_comparison}
+
+\subsubsection{Property p2 (Confidence Robustness)}
+
+Property p2 ensures that class confidence remains above a threshold within the perturbation bound. As illustrated in Figure~\ref{fig:safe_unsafe_model991_p2}, both tools show similar verification patterns but with significant differences in efficiency.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model991_p2.png}
+    \caption{SAFE/UNSAFE comparison for Model 991, Property p2 (Confidence Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model991_p2}
+\end{figure}
+
+The verification time comparison for Property p2 is shown in Figure~\ref{fig:time_model991_p2}, highlighting the efficiency advantage of $\alpha, \beta$-CROWN over Marabou.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model991_p2.png}
+    \caption{Verification time comparison for Model 991, Property p2 (Confidence Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model991_p2}
+\end{figure}
+
+At $\varepsilon = 0/255$, both tools verify that 100\% of instances satisfy the property. As $\varepsilon$ increases to 1/255, $\alpha, \beta$-CROWN determines outcomes for more instances than Marabou. At $\varepsilon = 3/255$, both tools find that the property is violated in most cases, indicating that confidence drops significantly even with small perturbations.
+
+Table~\ref{tab:p2_tool_comparison} provides a detailed comparison of the two tools for Property p2 across all models and perturbation bounds.
+
+\input{tables/table_p2_tool_comparison}
+
+\subsubsection{Property p3 (Combined Robustness)}
+
+Property p3 requires either no misclassification or confidence to remain high. As shown in Figure~\ref{fig:safe_unsafe_model991_p3}, this property shows verification patterns similar to the confidence robustness property (p2), suggesting that the confidence threshold is the dominant factor in this combined property.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model991_p3.png}
+    \caption{SAFE/UNSAFE comparison for Model 991, Property p3 (Combined Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model991_p3}
+\end{figure}
+
+Figure~\ref{fig:time_model991_p3} shows the verification time comparison for Property p3, which follows a similar pattern to the other properties.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model991_p3.png}
+    \caption{Verification time comparison for Model 991, Property p3 (Combined Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model991_p3}
+\end{figure}
+
+At $\varepsilon = 0/255$, both tools verify that approximately 92\% of instances satisfy the property. As $\varepsilon$ increases to 3/255, both tools find that the property is violated in most cases, with $\alpha, \beta$-CROWN providing more definitive results than Marabou.
+
+Table~\ref{tab:p3_tool_comparison} provides a detailed comparison of the two tools for Property p3 across all models and perturbation bounds.
+
+\input{tables/table_p3_tool_comparison}
+
+\subsubsection{Property p4 (Logit Stability)}
+
+Property p4 ensures that output logits remain within a certain percentage range of clean logits. As illustrated in Figure~\ref{fig:safe_unsafe_model991_p4}, both tools show similar verification patterns for this property.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model991_p4.png}
+    \caption{SAFE/UNSAFE comparison for Model 991, Property p4 (Logit Stability). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model991_p4}
+\end{figure}
+
+The verification time comparison for Property p4 is shown in Figure~\ref{fig:time_model991_p4}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model991_p4.png}
+    \caption{Verification time comparison for Model 991, Property p4 (Logit Stability). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model991_p4}
+\end{figure}
+
+At $\varepsilon = 0/255$, both tools verify that 100\% of instances satisfy the property. However, even at $\varepsilon = 1/255$, both tools find that the property is violated in most cases, indicating that logit values are highly sensitive to perturbations.
+
+Table~\ref{tab:p4_tool_comparison} provides a detailed comparison of the two tools for Property p4 across all models and perturbation bounds.
+
+\input{tables/table_p4_tool_comparison}
+
+\subsection{Impact of Model Size}
+
+Our analysis reveals a correlation between model size and verification performance, particularly for Marabou. Figures~\ref{fig:safe_unsafe_model2649_p1}, \ref{fig:safe_unsafe_model5160_p1}, and \ref{fig:safe_unsafe_model10018_p1} show the verification outcomes for Property p1 across models of increasing size.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model5160_p1.png}
+    \caption{SAFE/UNSAFE comparison for Model 5160, Property p1 (Standard Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model5160_p1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model10018_p1.png}
+    \caption{SAFE/UNSAFE comparison for Model 10018, Property p1 (Standard Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model10018_p1}
+\end{figure}
+
+The corresponding verification time comparisons are shown in Figures~\ref{fig:time_model2649_p1}, \ref{fig:time_model5160_p1}, and \ref{fig:time_model10018_p1}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model2649_p1.png}
+    \caption{Verification time comparison for Model 2649, Property p1 (Standard Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model2649_p1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model5160_p1.png}
+    \caption{Verification time comparison for Model 5160, Property p1 (Standard Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model5160_p1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model10018_p1.png}
+    \caption{Verification time comparison for Model 10018, Property p1 (Standard Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model10018_p1}
+\end{figure}
+
+As shown in Table~\ref{tab:p1_abcrown_model_comparison} and Table~\ref{tab:p1_marabou_model_comparison}, verification time generally increases with model size, but the rate of increase differs significantly between the two tools.
+
+\input{tables/table_p1_abcrown_model_comparison}
+\input{tables/table_p1_marabou_model_comparison}
+
+For $\alpha, \beta$-CROWN, the increase in verification time with model size is relatively modest, showing good scalability even for the largest models. For instance, when verifying Property p1 at $\varepsilon = 3/255$, the verification time increases only slightly from the 991-parameter model to the 10,018-parameter model.
+
+In contrast, Marabou exhibits a much steeper increase in verification time with model size. For the same property and perturbation bound, the verification time increases significantly from the 991-parameter model to the 10,018-parameter model. This difference in scalability becomes even more pronounced at higher perturbation bounds.
+
+\subsection{Additional Property Analysis}
+
+For completeness, we also analyze the verification outcomes and time performance for Properties p2, p3, and p4 across all models. Figures~\ref{fig:safe_unsafe_model2649_p2}, \ref{fig:safe_unsafe_model2649_p3}, and \ref{fig:safe_unsafe_model2649_p4} show the verification outcomes for Model 2649 across all properties.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model2649_p2.png}
+    \caption{SAFE/UNSAFE comparison for Model 2649, Property p2 (Confidence Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model2649_p2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model2649_p3.png}
+    \caption{SAFE/UNSAFE comparison for Model 2649, Property p3 (Combined Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model2649_p3}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model2649_p4.png}
+    \caption{SAFE/UNSAFE comparison for Model 2649, Property p4 (Logit Stability). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model2649_p4}
+\end{figure}
+
+The corresponding verification time comparisons are shown in Figures~\ref{fig:time_model2649_p2}, \ref{fig:time_model2649_p3}, and \ref{fig:time_model2649_p4}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model2649_p2.png}
+    \caption{Verification time comparison for Model 2649, Property p2 (Confidence Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model2649_p2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model2649_p3.png}
+    \caption{Verification time comparison for Model 2649, Property p3 (Combined Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model2649_p3}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model2649_p4.png}
+    \caption{Verification time comparison for Model 2649, Property p4 (Logit Stability). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model2649_p4}
+\end{figure}
+
+Similarly, we analyze the verification outcomes and time performance for Models 5160 and 10018 across all properties. Figures~\ref{fig:safe_unsafe_model5160_p2}, \ref{fig:safe_unsafe_model5160_p3}, and \ref{fig:safe_unsafe_model5160_p4} show the verification outcomes for Model 5160 across Properties p2, p3, and p4.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model5160_p2.png}
+    \caption{SAFE/UNSAFE comparison for Model 5160, Property p2 (Confidence Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model5160_p2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model5160_p3.png}
+    \caption{SAFE/UNSAFE comparison for Model 5160, Property p3 (Combined Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model5160_p3}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model5160_p4.png}
+    \caption{SAFE/UNSAFE comparison for Model 5160, Property p4 (Logit Stability). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model5160_p4}
+\end{figure}
+
+The corresponding verification time comparisons are shown in Figures~\ref{fig:time_model5160_p2}, \ref{fig:time_model5160_p3}, and \ref{fig:time_model5160_p4}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model5160_p2.png}
+    \caption{Verification time comparison for Model 5160, Property p2 (Confidence Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model5160_p2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model5160_p3.png}
+    \caption{Verification time comparison for Model 5160, Property p3 (Combined Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model5160_p3}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model5160_p4.png}
+    \caption{Verification time comparison for Model 5160, Property p4 (Logit Stability). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model5160_p4}
+\end{figure}
+
+Finally, Figures~\ref{fig:safe_unsafe_model10018_p2}, \ref{fig:safe_unsafe_model10018_p3}, and \ref{fig:safe_unsafe_model10018_p4} show the verification outcomes for Model 10018 across Properties p2, p3, and p4.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model10018_p2.png}
+    \caption{SAFE/UNSAFE comparison for Model 10018, Property p2 (Confidence Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model10018_p2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model10018_p3.png}
+    \caption{SAFE/UNSAFE comparison for Model 10018, Property p3 (Combined Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model10018_p3}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/safe_unsafe_model10018_p4.png}
+    \caption{SAFE/UNSAFE comparison for Model 10018, Property p4 (Logit Stability). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:safe_unsafe_model10018_p4}
+\end{figure}
+
+The corresponding verification time comparisons are shown in Figures~\ref{fig:time_model10018_p2}, \ref{fig:time_model10018_p3}, and \ref{fig:time_model10018_p4}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model10018_p2.png}
+    \caption{Verification time comparison for Model 10018, Property p2 (Confidence Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model10018_p2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model10018_p3.png}
+    \caption{Verification time comparison for Model 10018, Property p3 (Combined Robustness). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model10018_p3}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_model10018_p4.png}
+    \caption{Verification time comparison for Model 10018, Property p4 (Logit Stability). Left: $\alpha, \beta$-CROWN; Right: Marabou.}
+    \label{fig:time_model10018_p4}
+\end{figure}
+
+\subsection{Tool Performance Comparison}
+
+Our comparison of $\alpha, \beta$-CROWN and Marabou reveals significant differences in both efficiency and completeness.
+
+\subsubsection{Verification Efficiency}
+
+$\alpha, \beta$-CROWN consistently outperforms Marabou in terms of verification time across all properties, models, and perturbation bounds. The performance gap is particularly pronounced for Property p1 at higher perturbation bounds, where Marabou can be up to 40 times slower than $\alpha, \beta$-CROWN. For Property p2, the performance gap is smaller but still significant, with Marabou being 12-17 times slower on average.
+
+The efficiency advantage of $\alpha, \beta$-CROWN appears to be related to its use of optimized bound propagation techniques, which allow it to quickly determine tight bounds on network outputs. In contrast, Marabou's SMT-based approach, while more general, requires more computational resources, especially for larger networks and more complex properties.
+
+\subsubsection{Verification Completeness}
+
+$\alpha, \beta$-CROWN also demonstrates an advantage in terms of completeness, reporting fewer "Unknown" results than Marabou. This difference is most significant for Property p1 at higher perturbation bounds, where Marabou reports more instances as "Unknown" compared to $\alpha, \beta$-CROWN. For other properties, the difference in completeness is less pronounced but still favors $\alpha, \beta$-CROWN.
+
+Interestingly, both tools show similar verification outcomes (SAFE vs. UNSAFE) when they do provide definitive results. This consistency across different verification approaches increases confidence in the reliability of the verification results.
+
+\subsection{Property Sensitivity to Perturbation}
+
+Our analysis of property sensitivity to perturbation reveals distinct patterns for each property type.
+
+Property p4 (Logit Stability) shows the highest sensitivity to perturbation, with the percentage of instances where the property holds (SAFE) dropping dramatically from 100\% at $\varepsilon = 0/255$ to a small percentage at $\varepsilon = 1/255$. This indicates that even small perturbations can cause significant changes in the network's output logits.
+
+Property p2 (Confidence Robustness) and Property p3 (Combined Robustness) show similar sensitivity patterns, with SAFE percentages dropping from near 100\% at $\varepsilon = 0/255$ to very low values at $\varepsilon = 3/255$. This suggests that network confidence is also highly sensitive to perturbations.
+
+Property p1 (Standard Robustness) shows the most gradual decline in SAFE percentage, from approximately 92\% at $\varepsilon = 0/255$ to around 40\% at $\varepsilon = 3/255$ and further decreasing at higher perturbation bounds. This indicates that while the network's classification decisions are more robust than its confidence levels or logit values, they still become increasingly vulnerable as the perturbation bound increases.
+
+These sensitivity patterns are consistent across different model sizes and verification tools, suggesting that they reflect fundamental characteristics of the neural network controllers rather than artifacts of the verification process.
+
+\subsection{Practical Implications}
+
+Our comprehensive analysis yields several practical implications for neural network verification in autonomous driving:
+
+\begin{enumerate}
+    \item \textbf{Tool Selection:} $\alpha, \beta$-CROWN is clearly the preferred tool for verifying robustness properties of neural network controllers, offering significantly faster verification times and more definitive results. This advantage is particularly important for larger networks and more complex properties.
+
+    \item \textbf{Verification Strategy:} For time-critical applications, a staged verification approach is recommended: start with $\alpha, \beta$-CROWN for all instances, and only use Marabou for cases where $\alpha, \beta$-CROWN returns "Unknown."
+
+    \item \textbf{Robustness Guarantees:} The neural network controllers demonstrate reasonable robustness at low perturbation bounds ($\varepsilon \leq 1/255$), but robustness degrades rapidly at higher bounds. This suggests that these controllers may be vulnerable to adversarial perturbations in real-world scenarios.
+
+    %\item \textbf{Property Formulation:} The Combined Robustness property (p3) does not provide significant advantages over the individual properties (p1 and p2), suggesting that property formulation should be carefully considered to avoid redundancy.
+
+    \item \textbf{Model Design:} The verification results suggest that neural network controllers for autonomous driving should be designed with verification in mind, potentially incorporating robustness-enhancing techniques during training.
+
+    \item \textbf{Scalability Considerations:} While $\alpha, \beta$-CROWN shows good scalability with model size, verification time still increases with network complexity. This highlights the importance of balancing model expressiveness with verifiability in safety-critical applications.
+\end{enumerate}
+
+In conclusion, our benchmarking study demonstrates that state-of-the-art verification tools can effectively verify robustness properties of neural network controllers for autonomous driving, but with significant differences in efficiency and completeness. These findings provide valuable guidance for selecting appropriate verification tools, designing robust neural network controllers, and formulating meaningful robustness properties for safety-critical autonomous systems.

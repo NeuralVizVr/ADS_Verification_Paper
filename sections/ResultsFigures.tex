@@ -1,0 +1,207 @@
+
+\section{Introduction}
+
+Neural networks (NNs) increasingly underpin decision-making in safety-critical settings, yet their complexity and opacity complicate the provision of rigorous behavioural guarantees \cite{huang2020survey, liu2021algorithms}. Empirical testing alone can miss rare but catastrophic corner cases; safety-critical deployment therefore requires methods that can establish \emph{formal} guarantees of correctness and robustness under clearly specified operating conditions.
+
+Formal verification for NNs aims to prove that a property holds for all inputs within a region of interest (e.g., an $\ell_p$-ball around observed data) \cite{katz2019marabou}. The setting differs from traditional software verification both in object (learned, high-dimensional functions) and in failure modes: small, even imperceptible perturbations can induce harmful output deviations \cite{carlini2019evaluating}. A spectrum of techniques has emerged. \emph{Complete} methods—e.g., SMT/MILP encodings in the Reluplex/Marabou lineage—can prove or refute properties but often struggle to scale on modern networks \cite{katz2017reluplex, katz2019marabou}. \emph{Incomplete} methods trade completeness for scalability via abstractions/relaxations, including abstract interpretation and linear bound propagation with branch-and-bound (as in $\alpha,\beta$-CROWN) \cite{gehr2018ai2, singh2019abstract, zhang2018efficient, xu2021fast, wang2021beta, zhou2024scalable}. Recent DPLL(T)-based approaches bring conflict-driven clause learning and restarts to NN verification \cite{duong2024dpllt}. Community efforts such as VNN-COMP have accelerated progress through standardised tasks and transparent comparisons \cite{bak2021second, brix2023fourth}.
+
+Autonomous driving systems (ADS) are a particularly demanding application domain. NN components are pervasive across perception, planning and control \cite{bojarski2016end}, while robust operation must be ensured over high-dimensional sensory inputs and dynamic environments, under real-time constraints \cite{tran2020verification, dreossi2019verifai}. Although verification advances are well documented for image classifiers and selected control modules, there remains an under-documented gap: \emph{end-to-end, development-centred} workflows that integrate simulator-driven data collection, controller training, specification design, and formal verification in a single iterative loop.
+
+This paper presents an end-to-end pipeline for developing, training, and formally verifying vision-based neural controllers in a simulated ADS. We build a Unity-based closed-loop environment and curate a task-specific dataset for a discrete steering controller. We study a family of compact convolutional controllers and propose a set of task-adapted, \emph{scale-invariant} robustness properties tailored to control: label consistency (classification robustness), a relative-confidence constraint (adapted SCR), their conjunction (combined robustness), and per-logit stability. We verify these properties under $\ell_\infty$ perturbations using three complementary verifiers: $\alpha,\beta$-CROWN (linear relaxations + branch-and-bound) \cite{zhang2018efficient, xu2021fast, wang2021beta, zhou2024scalable}, Marabou (SMT-based, complete) \cite{katz2019marabou}, and NeuralSAT (DPLL(T) with clause learning and restarts) \cite{duong2024dpllt}. We further integrate adversarial training into the loop and examine how it affects \emph{verified} robustness (not just empirical accuracy). Empirically, across four models~$\times$~four properties~$\times$~four perturbation budgets~$\times$~three training radii (Table~\ref{tab:all_models_props}), we observe that adversarial training substantially increases verified-safe rates—especially for label consistency—and that Marabou yields near-zero \emph{Unknown} outcomes overall, whereas $\alpha,\beta$-CROWN and NeuralSAT exhibit higher \emph{Unknown} rates at intermediate perturbation budgets (details in \S\ref{sec:results}).
+
+\paragraph{Contributions.}
+\begin{itemize}
+  \item \textbf{A verification-centred ADS pipeline.} We integrate simulator-driven data collection, controller training, specification design, and formal verification into a single, iterative workflow suited to controller development and analysis.
+  \item \textbf{Task-adapted, scale-invariant specifications.} We refine canonical definitions into ADS-appropriate robustness properties (relative confidence and per-logit stability, plus their conjunction), mitigating brittleness of absolute logit thresholds and aligning verification with control risk \cite{casadio2022neural}.
+  \item \textbf{Tri-verifier evaluation within the pipeline.} We exercise three complementary tools—$\alpha,\beta$-CROWN \cite{zhang2018efficient, xu2021fast, wang2021beta, zhou2024scalable}, Marabou \cite{katz2019marabou}, and NeuralSAT \cite{duong2024dpllt}—across model sizes, perturbation budgets and training regimes, highlighting coverage–runtime–unknown trade-offs and typical vs.\ worst-case behaviour \cite{bak2021second, brix2023fourth}.
+  \item \textbf{Empirical insights on \emph{verified} robustness.} We show that scale-invariant properties are substantially more verifiable than strict label consistency, and that adversarial training measurably improves verified safety in this setting (with solver-specific effects on runtime/unknowns), substantiated by the full matrix of results in Table~\ref{tab:all_models_props}.
+  \item \textbf{Reproducibility.} We document environment, specifications, and tool configurations to enable reproduction and extension of our study.
+\end{itemize}
+
+\paragraph{Research Questions.}
+\begin{itemize}
+  \item \textbf{RQ1 (Pipeline).} How effectively can an end-to-end \emph{develop–train–verify} pipeline support controller design and analysis in a simulated ADS?
+  \item \textbf{RQ2 (Specifications).} Do task-adapted, scale-invariant properties yield higher verified coverage (and more informative failures) than strict label consistency under $\ell_\infty$ perturbations?
+  \item \textbf{RQ3 (Tools).} What are the coverage–runtime–unknown trade-offs among $\alpha,\beta$-CROWN, Marabou, and NeuralSAT when verifying these properties across model sizes and training regimes?
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  MODEL 39  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results and Discussion: A Multi-Axis, Tool-Agnostic Analysis}
+\label{sec:results}
+
+We treat verifiers as instruments that reveal the structure of the underlying verification problems, and organize the analysis along seven axes afforded by the dataset: (i) adversarial-training radius $\epsilon_{\mathrm{PGD}}$, (ii) verification radius $\varepsilon$, (iii) their interplay, (iv) model scale, (v) property identity, (vi) an operational taxonomy of difficulty, and (vii) solver complementarity. All quantitative statements below are read directly from the grouped tables and figure panels (Figs.~1--16; Tables~1--16 in the supplementary results). To avoid misplaced emphasis on tools, we first analyze problem factors; only then do we discuss solver behavior.
+
+\subsection{Adversarial Training is the Dominant Driver ($\epsilon_{\mathrm{PGD}}$-axis)}
+Adversarial training systematically shifts mass from \textsc{unsafe} to \textsc{safe} and collapses verification cost across all properties and models.
+
+\paragraph{Magnitude of the robustness shift.}
+For \textbf{Model~520, property p1, $\varepsilon=5/255$}, the naturally trained network ($\epsilon_{\mathrm{PGD}}{=}0$) achieves \textsc{safe} counts of \textbf{35/36/37} (for $\alpha,\beta$-CROWN/Marabou/NeuralSAT), whereas with adversarial training at $\epsilon_{\mathrm{PGD}}{=}15$ it jumps to \textbf{99/99/99} \textsc{safe} (Table~9). This pattern is ubiquitous at small~$\varepsilon$.
+
+\paragraph{Cost collapse on hard instances.}
+For \textbf{Model~924, p1, $\varepsilon=5/255$}, the naturally trained case is time-expensive for complete solvers (Marabou \textbf{502.11\,s}, NeuralSAT \textbf{972.87\,s}). With $\epsilon_{\mathrm{PGD}}{=}25$, runtimes drop to \textbf{3.92\,s} and \textbf{67.47\,s}, respectively; $\alpha,\beta$-CROWN drops from \textbf{35.49\,s} to \textbf{2.02\,s} (Table~13). Adversarial training not only improves outcomes but fundamentally simplifies the verification geometry.
+
+\subsection{Verification Radius Controls Outcome and Hardness ($\varepsilon$-axis)}
+Increasing $\varepsilon$ monotonically reduces the fraction of \textsc{safe} instances and---for incomplete methods---increases \textsc{unknown} near a ``borderline'' band.
+
+\paragraph{Monotone degradation of outcomes.}
+For \textbf{Model~39, p1, $\epsilon_{\mathrm{PGD}}{=}25$}, \textsc{safe} counts move \textbf{99} $\rightarrow$ \textbf{98} $\rightarrow$ \textbf{71} $\rightarrow$ \textbf{4} as $\varepsilon$ increases from $3/255$ to $20/255$ (Table~1).
+
+\paragraph{Incompleteness concentrates in the mid-$\varepsilon$ band.}
+For \textbf{Model~924, p1, $\epsilon_{\mathrm{PGD}}{=}0$}, $\alpha,\beta$-CROWN \textsc{unknown} increases from \textbf{20} (at $\varepsilon{=}3/255$) to \textbf{34} (at $\varepsilon{=}5/255$), while at very large $\varepsilon{=}20/255$ the instance becomes predominantly \textsc{unsafe} and thus cheaper for complete solvers to certify (Table~13). This is a recurring pattern: the mid-$\varepsilon$ regime is the hardest.
+
+\subsection{Interplay of Training and Verification Radii ($\epsilon_{\mathrm{PGD}}$ vs.\ $\varepsilon$)}
+Robustness is \emph{budget-local}: it concentrates near the training radius and attenuates beyond it.
+
+\paragraph{Budget-local robustness.}
+For \textbf{Model~39, p1, $\epsilon_{\mathrm{PGD}}{=}15$}, at $\varepsilon{=}10/255$ ($\varepsilon < \epsilon_{\mathrm{PGD}}$) we observe \textbf{54} \textsc{safe}, whereas at $\varepsilon{=}20/255$ ($\varepsilon > \epsilon_{\mathrm{PGD}}$) this collapses to \textbf{2} \textsc{safe} (Table~1). In short, adversarial training creates a robustness ``bubble'' around its training budget.
+
+\subsection{Scale Drives Non-Linear Cost (Model Axis)}
+Complete solvers exhibit sharp, non-linear cost growth with model size under comparable conditions; incomplete methods remain bounded but may return \textsc{unknown}.
+
+\paragraph{Same task, scale sweep.}
+On \textbf{p1, $\varepsilon{=}5/255$, $\epsilon_{\mathrm{PGD}}{=}0$}, Marabou times are \textbf{3.99\,s} (Model~39) $\rightarrow$ \textbf{5.25\,s} (116) $\rightarrow$ \textbf{220.24\,s} (520) $\rightarrow$ \textbf{502.11\,s} (924); $\alpha,\beta$-CROWN remains in a bounded envelope (\textbf{5.78\,s} $\rightarrow$ \textbf{18.10\,s} $\rightarrow$ \textbf{21.94\,s} $\rightarrow$ \textbf{35.49\,s}) (Tables~1, 5, 9, 13). The 924-parameter controller is a stress point for complete approaches.
+
+\subsection{Properties are Not Equivalent (Property Axis)}
+Different properties probe different output geometry; some are intrinsically harder.
+
+\paragraph{Property difficulty.}
+For \textbf{Model~39, $\varepsilon{=}3/255$, $\epsilon_{\mathrm{PGD}}{=}0$}, p1 has \textbf{69} \textsc{safe} vs.\ p2 with \textbf{36} \textsc{safe} (Tables~1--2). This indicates the p2 specification sits closer to decision boundaries for that model.
+
+\paragraph{Near-symmetries.}
+For \textbf{Model~39, $\varepsilon{=}5/255$, $\epsilon_{\mathrm{PGD}}{=}15$}, p2 and p3 rows are \emph{identical}: \textbf{37/37/37} \textsc{safe}, \textbf{31/63/31} \textsc{unsafe}, \textbf{32/0/32} \textsc{unknown} (Tables~2--3). Such coincidences suggest structural symmetry in the property definitions or learned representation. By contrast, p4 is systematically tougher at small~$\varepsilon$ (cf.\ Table~4).
+
+\subsection{An Operational Taxonomy of Difficulty}
+We synthesize the axes above into a practical notion of instance difficulty.
+
+\paragraph{Easy.}
+Adversarially trained ($\epsilon_{\mathrm{PGD}}>0$), $\varepsilon \le \epsilon_{\mathrm{PGD}}$, small/mid models.
+\emph{Prototype:} \textbf{Model~116, p1, $\varepsilon{=}3/255$, $\epsilon_{\mathrm{PGD}}{=}25$}: \textsc{safe} \textbf{100/100/100}; $\alpha,\beta$-CROWN \textbf{2.01\,s}, Marabou \textbf{1.76\,s} (Table~5).
+
+\paragraph{Medium.}
+Adversarially trained, $\varepsilon \approx \epsilon_{\mathrm{PGD}}$, mid models. Incomplete methods accrue \textsc{unknown}, complete methods solve at higher cost.
+\emph{Example:} \textbf{Model~520, p4, $\varepsilon{=}3/255$, $\epsilon_{\mathrm{PGD}}{=}25$}: \textsc{safe} \textbf{73/73/73}; $\alpha,\beta$-CROWN \textbf{5.81\,s}, Marabou \textbf{4.92\,s} (Table~12).
+
+\paragraph{Hard.}
+Natural training, mid $\varepsilon$ (e.g., $10/255$), large models.
+\emph{Prototype:} \textbf{Model~924, p1, $\varepsilon{=}10/255$, $\epsilon_{\mathrm{PGD}}{=}15$}: $\alpha,\beta$-CROWN \textsc{unknown} \textbf{40}; Marabou \textbf{500.71\,s} (\textsc{unknown} \textbf{14}); NeuralSAT \textbf{1089.41\,s} (\textsc{unknown} \textbf{32}) (Table~13).
+The $40$ instances unknown to $\alpha,\beta$-CROWN decompose as: $+1$ \textsc{safe}, $+25$ \textsc{unsafe} resolved by Marabou; $14$ remain \textsc{unknown} even for Marabou.
+
+\paragraph{Very Hard.}
+Natural training, mid $\varepsilon$, largest models (p1/p4). NeuralSAT tails $\gtrsim\!900$\,s and Marabou tails $\gtrsim\!600$\,s are common (Tables~13--16).
+
+\subsection{Solver Complementarity (What Tool Behavior Reveals)}
+The tools expose complementary facets of the same structure.
+
+\paragraph{Marabou (complete).}
+Provides ground truth when it finishes, enabling post-hoc classification of incomplete \textsc{unknown} cases, but exhibits heavy tails on large models/mid~$\varepsilon$ (e.g., \textbf{630.66\,s} for \textbf{Model~924, p1, $\varepsilon{=}10/255$, $\epsilon_{\mathrm{PGD}}{=}25$}; Table~13).
+
+\paragraph{$\alpha,\beta$-CROWN (incomplete).}
+Has the tightest runtime envelope across the matrix and is ideal for large-scale triage, but concentrates \textsc{unknown} in the boundary band (e.g., $\varepsilon{=}10/255$).
+
+\paragraph{NeuralSAT (complete).}
+When it solves, it agrees qualitatively with Marabou; however, on the hardest quadrants its tails are often the largest (e.g., \textbf{1246.51\,s} for \textbf{Model~520, p1, $\varepsilon{=}10/255$, $\epsilon_{\mathrm{PGD}}{=}15$}; Table~9).
+
+\subsection{Aggregate View (for Context, Not as a Leaderboard)}
+Aggregating the full $192$ condition-rows (4 models $\times$ 4 properties $\times$ 4~$\varepsilon$ $\times$ 3~$\epsilon_{\mathrm{PGD}}$; 100 instances each), the mean solved rate (\textsc{safe}+\textsc{unsafe}) is $\approx$\textbf{86.6\%} for $\alpha,\beta$-CROWN, \textbf{99.45\%} for Marabou, and \textbf{89.3\%} for NeuralSAT; the median per-instance times are $\approx$\textbf{13.53\,s}, \textbf{6.56\,s}, and \textbf{42.11\,s}, respectively. These summaries contextualize the per-axis findings above without substituting for them.
+
+\subsection{Actionable Guidance and Reproducible Claims}
+\paragraph{Train to your threat model.}
+Robustness and verifiability are strongest near $\epsilon_{\mathrm{PGD}}$; do not expect generalization far beyond it.
+
+\paragraph{Choose $\varepsilon$ deliberately.}
+Mid-$\varepsilon$ (here, $10/255$) is the hard band: expect \textsc{unknown} for incomplete methods and long tails for complete methods.
+
+\paragraph{Scale with a portfolio.}
+A two-phase schedule works well in practice: (i) run $\alpha,\beta$-CROWN with a modest budget (e.g., 10--15\,s) as triage; (ii) escalate residuals to Marabou with \emph{model-aware} caps (e.g., $\le$10\,s for models 39/116, $\le$30\,s for 520, $\le$120\,s for 924). Reserve NeuralSAT for independent confirmation or niches where it historically helps.
+
+\subsection{Threats to Validity (Anticipating Critique)}
+\paragraph{Benchmark scope.}
+Controllers are verified in a simulated ADS; results should not be over-generalized to high-dimensional perception networks without further study.
+
+\paragraph{Parameterization.}
+Solver heuristics, cut strategies, or parallelism settings could shift some trade-offs. We fix configurations across runs to ensure comparability.
+
+\paragraph{Hardware effects.}
+Reported times are averages on the given platform; absolute numbers may shift on different hardware, but the \emph{relative} trends across axes are robust.
+
+\paragraph{Property semantics.}
+Near-symmetries (e.g., p2 vs.\ p3 on Model~39 at $\varepsilon{=}5/255$, $\epsilon_{\mathrm{PGD}}{=}15$) likely reflect structural aspects of the specifications; we report them as empirical phenomena without over-interpretation.
+
+\medskip
+\noindent\textbf{Summary.} Across axes, \emph{adversarial training simplifies verification}, \emph{$\varepsilon$ sets the hardness band}, \emph{scale drives non-linear cost for complete solvers}, and \emph{properties probe distinct geometry}. The numbers argue for an \emph{incomplete-first, complete-second} portfolio with budgets tuned to model size and $(\varepsilon,\epsilon_{\mathrm{PGD}})$.
+
+
+\newpage
+\input{figures/results-1.tex}
+\plotmodelgrid{39}{1}
+\input{tables/results/table_model39_prop1.tex}
+
+\newpage
+
+\plotmodelgrid{39}{2}
+\input{tables/results/table_model39_prop2.tex}
+\newpage
+\plotmodelgrid{39}{3}            % <- p3  (original property 12)
+\input{tables/results/table_model39_prop3.tex}
+
+\newpage
+\plotmodelgrid{39}{4}            % <- p4  (original property 32)
+\input{tables/results/table_model39_prop4.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  MODEL 116
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\plotmodelgrid{116}{1}
+\input{tables/results/table_model116_prop1.tex}
+
+\newpage
+\plotmodelgrid{116}{2}
+\input{tables/results/table_model116_prop2.tex}
+
+\newpage
+\plotmodelgrid{116}{3}
+\input{tables/results/table_model116_prop3.tex}
+
+\newpage
+\plotmodelgrid{116}{4}
+\input{tables/results/table_model116_prop4.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  MODEL 520
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\plotmodelgrid{520}{1}
+\input{tables/results/table_model520_prop1.tex}
+
+\newpage
+\plotmodelgrid{520}{2}
+\input{tables/results/table_model520_prop2.tex}
+
+\newpage
+\plotmodelgrid{520}{3}
+\input{tables/results/table_model520_prop3.tex}
+
+\newpage
+\plotmodelgrid{520}{4}
+\input{tables/results/table_model520_prop4.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  MODEL 924
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage 
+\plotmodelgrid{924}{1} 
+\input{tables/results/table_model924_prop1.tex}
+
+\newpage
+\plotmodelgrid{924}{2}
+\input{tables/results/table_model924_prop2.tex}
+
+\newpage
+\plotmodelgrid{924}{3}
+\input{tables/results/table_model924_prop3.tex}
+
+\newpage
+\plotmodelgrid{924}{4}
+\input{tables/results/table_model924_prop4.tex}
